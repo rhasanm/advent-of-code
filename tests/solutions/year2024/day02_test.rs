@@ -1,4 +1,4 @@
-use advent_of_code::solutions::year2024::day02::{self, check_safe_reports};
+use advent_of_code::solutions::year2024::day02::{self, check_safe_reports, maximize_safe_reports};
 use anyhow::Result;
 
 const EXAMPLE_INPUT: &str = "\
@@ -23,5 +23,22 @@ fn test_part1_solution() -> Result<()> {
     let solution = day02::solve_part1()?;
     println!("Solution Part 1: {}", solution);
     assert_eq!(solution, "510");
+    Ok(())
+}
+
+#[test]
+fn test_part2_example() -> Result<()> {
+    let data = day02::parse_input(EXAMPLE_INPUT)?;
+
+    let res = maximize_safe_reports(data);
+    assert_eq!(res, "4");
+    Ok(())
+}
+
+#[test]
+fn test_part2_solution() -> Result<()> {
+    let solution = day02::solve_part2()?;
+    println!("Solution Part 1: {}", solution);
+    assert_eq!(solution, "553");
     Ok(())
 }
