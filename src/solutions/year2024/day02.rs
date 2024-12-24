@@ -110,20 +110,17 @@ fn get_unsafe_reports(data: Data) -> Data {
         .collect()
 }
 
-fn remove_and_check(data: &[i128]) -> bool {
-    for i in 0..data.len() {
-        let data_without_current: Vec<i128> = data
+fn remove_and_check(report: &[i128]) -> bool {
+    (0..report.len()).any(|i| {
+        let data_without_current: Vec<i128> = report
             .iter()
             .enumerate()
             .filter(|&(idx, _)| idx != i)
             .map(|(_, &val)| val)
             .collect();
         
-        if !is_unsafe(&data_without_current) {
-            return true;
-        }
-    }
-    false
+        !is_unsafe(&data_without_current)
+    })
 }
 
 pub fn maximize_safe_reports(data: Data) -> String {
@@ -151,4 +148,35 @@ pub fn solve_part2() -> Result<String> {
 
     let tot = maximize_safe_reports(data);
     Ok(tot)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_has_valid_differences() {
+        assert!(has_valid_differences(&[5, 3, 1]));
+        assert!(!has_valid_differences(&[1, 5, 6]));
+        assert!(has_valid_differences(&[1]));
+        assert!(has_valid_differences(&[]));
+    }
+
+    #[test]
+    fn test_has_trend() {
+        assert!(has_trend(&[1, 2, 3], TrendType::Increasing));
+        assert!(has_trend(&[5, 3, 1], TrendType::Decreasing));
+        assert!(!has_trend(&[1, 3, 2], TrendType::Increasing));
+        assert!(has_trend(&[1], TrendType::Increasing));
+    }
+
+    #[test]
+    fn test_maximize_safe_reports() {
+        let data = vec![
+            vec![1, 2, 3],
+            vec![1, 5, 2],
+            vec![1, 5, 8],
+        ];
+        assert_eq!(maximize_safe_reports(data), "3");
+    }
 }
