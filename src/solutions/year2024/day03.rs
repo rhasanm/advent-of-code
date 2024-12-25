@@ -6,6 +6,40 @@ pub fn parse_input(input: &str) -> Result<Vec<String>> {
     Ok(input.lines().map(String::from).collect())
 }
 
+fn valid_mul_instructions(data: Vec<String>) -> Vec<String> {
+    let re = Regex::new(r"do\(\)|don't\(\)|mul\((\d+),(\d+)\)").unwrap();
+
+    let mut instructions: Vec<String> = data.iter()
+        .flat_map(|instruction| {
+            re.find_iter(instruction)
+                .map(|m| m.as_str().to_string())
+        })
+        .collect();
+    
+        let mut enabled = true;
+        instructions = instructions.iter()
+            .map(|instruction| match instruction.as_str() {
+                "don't()" => {
+                    enabled = false;
+                    String::new()
+                },
+                "do()" => {
+                    enabled = true;
+                    String::new()
+                },
+                _ => {
+                    if enabled {
+                        instruction.to_string()
+                    } else {
+                        String::new()
+                    }
+                }
+            })
+            .collect::<Vec<String>>();
+    
+    instructions.iter().filter(|instruction| !instruction.as_str().is_empty()).cloned().collect()
+}
+
 fn mul_instructions(data: Vec<String>) -> Vec<String> {
     let re = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
 
@@ -42,15 +76,28 @@ pub fn solve_part1() -> Result<String> {
     Ok(result.to_string())
 }
 
+pub fn solve_part2() -> Result<String> {
+    let input = utils::read_input(2024, 3).context("Could not read input file")?;
+
+    let data = parse_input(&input).context("Could not parse input")?;
+
+    let instructions = valid_mul_instructions(data);
+
+    let result = add_up_all_after_mul(instructions);
+
+    Ok(result.to_string())
+}
+
 #[cfg(test)]
 mod tests {
     use regex::Regex;
     use anyhow::Result;
 
-    use crate::solutions::year2024::day03::{self, add_up_all_after_mul, mul_instructions, solve_part1};
+    use crate::solutions::year2024::{day03::solve_part2, day03::{self, add_up_all_after_mul, mul_instructions, solve_part1, valid_mul_instructions}};
     
     const EXAMPLE_INPUT: &str = "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))";
-    
+    const EXAMPLE_INPUT2: &str = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))";
+
     #[test]
     fn test_mul_instructions() {
         println!("{:?}", mul_instructions(vec!["xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))".to_string()]));
@@ -70,10 +117,29 @@ mod tests {
     }
 
     #[test]
+    fn test_part2_example() -> Result<()> {
+        let data = day03::parse_input(EXAMPLE_INPUT2)?;
+
+        let instructions = valid_mul_instructions(data);
+
+        let result = add_up_all_after_mul(instructions);
+
+        assert_eq!(result, 48);
+        Ok(())
+    }
+
+    #[test]
     fn test_solve_part1() {
         let res = solve_part1().unwrap();
 
         assert_eq!(res, "161289189")
+    }
+
+    #[test]
+    fn test_solve_part2() {
+        let res = solve_part2().unwrap();
+
+        assert_eq!(res, "83595109")
     }
 
     #[test]
