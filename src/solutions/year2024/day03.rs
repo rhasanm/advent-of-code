@@ -7,37 +7,25 @@ pub fn parse_input(input: &str) -> Result<Vec<String>> {
 }
 
 fn valid_mul_instructions(data: Vec<String>) -> Vec<String> {
-    let re = Regex::new(r"do\(\)|don't\(\)|mul\((\d+),(\d+)\)").unwrap();
+    static INSTRUCTION_PATTERN: &str = r"do\(\)|don't\(\)|mul\((\d+),(\d+)\)";
+    let re = Regex::new(INSTRUCTION_PATTERN).expect("Invalid regex pattern");
 
-    let mut instructions: Vec<String> = data.iter()
-        .flat_map(|instruction| {
-            re.find_iter(instruction)
-                .map(|m| m.as_str().to_string())
+    let mut enabled = true;
+    data.iter()
+        .flat_map(|line| re.find_iter(line).map(|m| m.as_str().to_string()))
+        .filter_map(|instruction| match instruction.as_str() {
+            "don't()" => {
+                enabled = false;
+                None
+            },
+            "do()" => {
+                enabled = true;
+                None
+            },
+            _ if enabled => Some(instruction),
+            _ => None
         })
-        .collect();
-    
-        let mut enabled = true;
-        instructions = instructions.iter()
-            .map(|instruction| match instruction.as_str() {
-                "don't()" => {
-                    enabled = false;
-                    String::new()
-                },
-                "do()" => {
-                    enabled = true;
-                    String::new()
-                },
-                _ => {
-                    if enabled {
-                        instruction.to_string()
-                    } else {
-                        String::new()
-                    }
-                }
-            })
-            .collect::<Vec<String>>();
-    
-    instructions.iter().filter(|instruction| !instruction.as_str().is_empty()).cloned().collect()
+        .collect()
 }
 
 fn mul_instructions(data: Vec<String>) -> Vec<String> {
