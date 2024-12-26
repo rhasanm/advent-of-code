@@ -16,6 +16,11 @@ lazy_static::lazy_static! {
     pub static ref DIRECTIONS: Vec<char> = vec!['>', '<', 'v', '^'];
 }
 
+fn is_within_bounds(position: (i128, i128), path: &Vec<String>) -> bool {
+    let (x, y) = position;
+    x >= 0 && y >= 0 && (x as usize) < path.len() && (y as usize) < path[0].len()
+}
+
 pub fn parse_input(input: &str) -> Result<Vec<String>> {
     Ok(input.lines().map(String::from).collect())
 }
@@ -41,21 +46,13 @@ pub fn walk(mut path: Vec<String>) -> i128 {
 
     let mut visited = 0;
     loop {
-        if guard.0 < 0
-            || guard.0 as usize >= path.len()
-            || guard.1 < 0
-            || guard.1 as usize >= path.get(guard.0 as usize).unwrap().len()
-        {
+        if !is_within_bounds(guard, &path) {
             break;
         }
 
         let next_move = *MAPPER.get(&direction).unwrap();
         let next_square = (guard.0 + next_move.0, guard.1 + next_move.1);
-        if next_square.0 < 0
-            || next_square.0 as usize >= path.len()
-            || next_square.1 < 0
-            || next_square.1 as usize >= path.get(next_square.0 as usize).unwrap().len()
-        {
+        if !is_within_bounds(next_square, &path) {
             visited += 1;
             break;
         }
