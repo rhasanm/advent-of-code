@@ -34,7 +34,11 @@ fn test_part1_solution() -> Result<()> {
 #[test]
 fn test_part2_example() -> Result<()> {
     let data = day04::parse_input(EXAMPLE_INPUT)?;
-    // TODO: Add test implementation
+
+    let solution = day04::count_x(&data);
+
+    assert_eq!(solution, 9);
+
     Ok(())
 }
 
@@ -42,7 +46,6 @@ fn test_part2_example() -> Result<()> {
 fn test_part2_solution() -> Result<()> {
     let solution = day04::solve_part2()?;
     println!("Solution Part 2: {}", solution);
-    // TODO: Once you have the correct answer, uncomment and update:
-    // assert_eq!(solution, "expected_answer");
+    assert_eq!(solution, 1864);
     Ok(())
 }
