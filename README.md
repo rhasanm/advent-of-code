@@ -9,11 +9,14 @@ This repository contains my solutions to [Advent of Code](https://adventofcode.c
 ├── src/
 │   ├── solutions/       # Solutions organized by year
 │   │   ├── year2022/
-│   │   └── year2023/
-│   └── utils/          # Shared utility functions
+│   │   ├── year2023/
+│   │   └── year2024/
+│   ├── utils/          # Shared utility functions
+│   └── bin/            # Command-line tools
 ├── inputs/             # Input files organized by year
 │   ├── 2022/
-│   └── 2023/
+│   ├── 2023/
+│   └── 2024/
 └── tests/             # Test files matching the solution structure
 ```
 
@@ -64,25 +67,39 @@ cargo test year2023::day01::part1
 
 ## 📝 Adding New Solutions
 
-1. Create a new solution file:
+You can use our custom command-line tool to create new solution files:
+
 ```bash
-# For Year 2023, Day 3
-touch src/solutions/year2023/day03.rs
+# Create solution files for a specific year and day
+cargo run --bin aoc new -y 2024 -d 1
 ```
 
-2. Add the module to `src/solutions/year2023/mod.rs`:
+This will automatically:
+1. Create the solution file with template code
+2. Create the test file with example and solution tests
+3. Create an empty input file
+4. Update all necessary mod.rs files
+
+Or manually create files:
+
+1. Create a new solution file:
+```bash
+touch src/solutions/year2024/day01.rs
+```
+
+2. Add the module to `src/solutions/year2024/mod.rs`:
 ```rust
-pub mod day03;
+pub mod day01;
 ```
 
 3. Create the corresponding test file:
 ```bash
-touch tests/solutions/year2023/day03_test.rs
+touch tests/solutions/year2024/day01_test.rs
 ```
 
 4. Add your input file:
 ```bash
-touch inputs/2023/day03.txt
+touch inputs/2024/day01.txt
 ```
 
 ## 🔧 Development Tools
@@ -104,9 +121,11 @@ cargo clippy
 - `itertools`: For additional iterator operations
 - `rayon`: For parallel processing
 - `anyhow`: For error handling
+- `clap`: For command-line argument parsing
 
 ## 💡 Tips
 
+- Use the `aoc` command-line tool to generate new solution files
 - Input files should be named as `dayXX.txt` (e.g., `day01.txt`, `day02.txt`)
 - Each day's solution should implement both `solve_part1()` and `solve_part2()`
 - Add tests using the example inputs provided in the problem description
