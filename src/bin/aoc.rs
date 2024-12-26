@@ -1,7 +1,7 @@
 use clap::{Parser, Subcommand};
 use std::fs;
-use std::path::Path;
 use std::io::Write;
+use std::path::Path;
 
 #[derive(Parser)]
 #[command(name = "aoc")]
@@ -61,7 +61,9 @@ fn create_solution_files(year: u32, day: u32) -> std::io::Result<()> {
     let solution_file = format!("{}/day{:02}.rs", solution_dir, day);
     if !Path::new(&solution_file).exists() {
         let mut file = fs::File::create(&solution_file)?;
-        write!(file, r#"use crate::utils;
+        write!(
+            file,
+            r#"use crate::utils;
 use anyhow::Result;
 
 pub fn parse_input(input: &str) -> Result<Vec<String>> {{
@@ -82,14 +84,18 @@ pub fn solve_part2() -> Result<String> {{
     
     // TODO: Implement solution
     Ok("Not implemented yet".to_string())
-}}"#, year, day, year, day)?;
+}}"#,
+            year, day, year, day
+        )?;
     }
 
     // Create test file
     let test_file = format!("{}/day{:02}_test.rs", test_dir, day);
     if !Path::new(&test_file).exists() {
         let mut file = fs::File::create(&test_file)?;
-        write!(file, r#"use advent_of_code::solutions::year{}::day{:02};
+        write!(
+            file,
+            r#"use advent_of_code::solutions::year{}::day{:02};
 use anyhow::Result;
 
 const EXAMPLE_INPUT: &str = "\
@@ -127,7 +133,9 @@ fn test_part2_solution() -> Result<()> {{
     // TODO: Once you have the correct answer, uncomment and update:
     // assert_eq!(solution, "expected_answer");
     Ok(())
-}}"#, year, day, day, day, day, day)?;
+}}"#,
+            year, day, day, day, day, day
+        )?;
     }
 
     // Create/update tests/solutions/yearXXXX/mod.rs

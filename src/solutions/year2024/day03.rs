@@ -17,13 +17,13 @@ fn valid_mul_instructions(data: Vec<String>) -> Vec<String> {
             "don't()" => {
                 enabled = false;
                 None
-            },
+            }
             "do()" => {
                 enabled = true;
                 None
-            },
+            }
             _ if enabled => Some(instruction),
-            _ => None
+            _ => None,
         })
         .collect()
 }
@@ -42,10 +42,13 @@ fn mul_instructions(data: Vec<String>) -> Vec<String> {
 
 fn add_up_all_after_mul(instructions: Vec<String>) -> i128 {
     let re = Regex::new(r"\d+").unwrap();
-    instructions.iter()
+    instructions
+        .iter()
         .map(|instruction| {
-            let numbers: Vec<i128> = re.find_iter(instruction)
-                .flat_map(|number| number.as_str().parse::<i128>()).collect();
+            let numbers: Vec<i128> = re
+                .find_iter(instruction)
+                .flat_map(|number| number.as_str().parse::<i128>())
+                .collect();
 
             numbers[0] * numbers[1]
         })
@@ -78,17 +81,30 @@ pub fn solve_part2() -> Result<String> {
 
 #[cfg(test)]
 mod tests {
-    use regex::Regex;
     use anyhow::Result;
+    use regex::Regex;
 
-    use crate::solutions::year2024::{day03::solve_part2, day03::{self, add_up_all_after_mul, mul_instructions, solve_part1, valid_mul_instructions}};
-    
-    const EXAMPLE_INPUT: &str = "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))";
-    const EXAMPLE_INPUT2: &str = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))";
+    use crate::solutions::year2024::{
+        day03::solve_part2,
+        day03::{
+            self, add_up_all_after_mul, mul_instructions, solve_part1, valid_mul_instructions,
+        },
+    };
+
+    const EXAMPLE_INPUT: &str =
+        "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))";
+    const EXAMPLE_INPUT2: &str =
+        "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))";
 
     #[test]
     fn test_mul_instructions() {
-        println!("{:?}", mul_instructions(vec!["xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))".to_string()]));
+        println!(
+            "{:?}",
+            mul_instructions(vec![
+                "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"
+                    .to_string()
+            ])
+        );
         assert!(true, "This is not valid");
     }
 
@@ -135,8 +151,10 @@ mod tests {
         let re = Regex::new(r"\d+").unwrap();
         let instruction = "mul(212,114)";
 
-        let numbers: Vec<i128> = re.find_iter(instruction)
-            .flat_map(|number| number.as_str().parse::<i128>()).collect();
+        let numbers: Vec<i128> = re
+            .find_iter(instruction)
+            .flat_map(|number| number.as_str().parse::<i128>())
+            .collect();
 
         println!("{:?}", numbers);
     }
