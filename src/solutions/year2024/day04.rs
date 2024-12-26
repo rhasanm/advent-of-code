@@ -32,14 +32,16 @@ pub fn count_x(grid: &[String]) -> i128 {
     let check = |i: usize, j: usize| -> bool {
         let mut lr = String::from('A');
         let mut rl = String::from('A');
-        
+
         for &(x, y) in &direction_lr {
             let new_i = i as isize + x;
             let new_j = j as isize + y;
-            
-            if new_i >= 0 && new_j >= 0 && 
-               new_i < grid.len() as isize && 
-               new_j < grid[0].len() as isize {
+
+            if new_i >= 0
+                && new_j >= 0
+                && new_i < grid.len() as isize
+                && new_j < grid[0].len() as isize
+            {
                 lr.push(grid[new_i as usize].chars().nth(new_j as usize).unwrap());
             }
         }
@@ -47,15 +49,18 @@ pub fn count_x(grid: &[String]) -> i128 {
         for &(x, y) in &direction_rl {
             let new_i = i as isize + x;
             let new_j = j as isize + y;
-            
-            if new_i >= 0 && new_j >= 0 && 
-               new_i < grid.len() as isize && 
-               new_j < grid[0].len() as isize {
+
+            if new_i >= 0
+                && new_j >= 0
+                && new_i < grid.len() as isize
+                && new_j < grid[0].len() as isize
+            {
                 rl.push(grid[new_i as usize].chars().nth(new_j as usize).unwrap());
             }
         }
 
-        sorted(lr.chars()).collect::<String>() == "AMS" && sorted(rl.chars()).collect::<String>() == "AMS"
+        sorted(lr.chars()).collect::<String>() == "AMS"
+            && sorted(rl.chars()).collect::<String>() == "AMS"
     };
 
     let mut count = 0;
