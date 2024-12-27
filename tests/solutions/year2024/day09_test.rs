@@ -6,15 +6,22 @@ const EXAMPLE_INPUT: &str = "2333133121414131402";
 #[test]
 fn test_part1_example() -> Result<()> {
     let data = day09::parse_input(EXAMPLE_INPUT)?;
-    
+
     let blocks = day09::represent_blocks(&data);
 
     fn blocks_to_string(blocks: &[i32]) -> String {
-        blocks.iter()
-            .map(|&id| if id == -1 { '.' } else { char::from_digit(id as u32, 10).unwrap() })
+        blocks
+            .iter()
+            .map(|&id| {
+                if id == -1 {
+                    '.'
+                } else {
+                    char::from_digit(id as u32, 10).unwrap()
+                }
+            })
             .collect()
     }
-    
+
     assert_eq!(
         blocks_to_string(&blocks),
         "00...111...2...333.44.5555.6666.777.888899"
