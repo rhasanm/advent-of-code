@@ -1,6 +1,5 @@
 use advent_of_code::solutions::year2024::day11;
 use anyhow::Result;
-use rayon::vec;
 
 const EXAMPLE_INPUT: &str = "125 17";
 
@@ -33,13 +32,6 @@ fn test_part1_solution() -> Result<()> {
     println!("Solution Part 1: {}", solution);
 
     assert_eq!(solution, 228668);
-    Ok(())
-}
-
-#[test]
-fn test_part2_example() -> Result<()> {
-    let data = day11::parse_input(EXAMPLE_INPUT)?;
-    // TODO: Add test implementation
     Ok(())
 }
 

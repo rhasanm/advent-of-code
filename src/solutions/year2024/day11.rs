@@ -1,5 +1,3 @@
-use std::{f32::consts::{LOG10_2, LOG2_10}, f64::consts::LOG10_E};
-
 use crate::utils;
 use anyhow::Result;
 
@@ -12,7 +10,8 @@ pub fn parse_input(input: &str) -> Result<Vec<i128>> {
 }
 
 pub fn blink(stones: Vec<i128>) -> Vec<i128> {
-    stones.iter()
+    stones
+        .iter()
         .flat_map(|&stone| {
             let digit_count = if stone == 0 {
                 1
