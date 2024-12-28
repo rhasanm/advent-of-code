@@ -1,95 +1,80 @@
 use std::collections::{HashMap, VecDeque};
 
-use crate::utils;
+use crate::utils::{self, Grid};
 use anyhow::Result;
 
-pub fn parse_input(input: &str) -> Result<Vec<String>> {
-    Ok(input.lines().map(String::from).collect())
-}
+const DIRECTIONS: [(i32, i32); 4] = [(0, 1), (1, 0), (0, -1), (-1, 0)];
+const VISITED: char = '#';
+const EMPTY: char = '.';
 
-pub fn inside_farm(limit_x: i32, limit_y: i32, x: i32, y: i32) -> bool {
-    x >= 0 && y >= 0 && x < limit_x && y < limit_y
-}
+pub fn flood_fill(grid: &mut Grid, start_x: usize, start_y: usize) -> (char, i128) {
+    let target = grid.get(start_x as i32, start_y as i32).unwrap();
+    if target == EMPTY {
+        return (EMPTY, 0);
+    }
 
-pub fn flood_fill(arrangement: &mut Vec<String>, x: usize, y: usize) -> (char, i128) {
-    let directions = [(0, 1), (1, 0), (0, -1), (-1, 0)];
-
-    let mut q = VecDeque::<(usize, usize)>::from([(x, y)]);
-    let plant = arrangement[x].chars().nth(y).unwrap();
-    arrangement[x].replace_range(y..=y, "#");
+    let mut queue = VecDeque::from([(start_x as i32, start_y as i32)]);
+    grid.set(start_x as i32, start_y as i32, VISITED);
+    
     let mut area = 0;
     let mut perimeter = 0;
 
-    while !q.is_empty() {
-        let grid = q.pop_front().unwrap();
+    while let Some((x, y)) = queue.pop_front() {
         area += 1;
         
-        for (dx, dy) in directions {
-            let next_x = grid.0 as i32 + dx;
-            let next_y = grid.1 as i32 + dy;
-
-            if inside_farm(
-                arrangement.len() as i32,
-                arrangement[0].len() as i32,
-                next_x,
-                next_y,
-            ) && arrangement[next_x as usize]
-                .chars()
-                .nth(next_y as usize)
-                .unwrap()
-                == plant
-            {
-                arrangement[next_x as usize].replace_range(next_y as usize..=next_y as usize, "#");
-
-                q.push_back((next_x as usize, next_y as usize));
-            } else if !inside_farm(
-                arrangement.len() as i32,
-                arrangement[0].len() as i32,
-                next_x,
-                next_y,
-            ) || (inside_farm(
-                arrangement.len() as i32,
-                arrangement[0].len() as i32,
-                next_x,
-                next_y,
-            ) && arrangement[next_x as usize]
-                .chars()
-                .nth(next_y as usize)
-                .unwrap()
-                != '#')
-            {
-                perimeter += 1;
+        for &(dx, dy) in &DIRECTIONS {
+            let (next_x, next_y) = (x + dx, y + dy);
+            
+            match grid.get(next_x, next_y) {
+                Some(cell) if cell == target => {
+                    grid.set(next_x, next_y, VISITED);
+                    queue.push_back((next_x, next_y));
+                }
+                Some(cell) if cell != VISITED => perimeter += 1,
+                None => perimeter += 1,
+                _ => {}
             }
         }
     }
 
-    *arrangement = arrangement.iter().map(|line| line.replace("#", ".")).collect();
+    for row in 0..grid.rows {
+        for col in 0..grid.cols {
+            if grid.get(row, col) == Some(VISITED) {
+                grid.set(row, col, EMPTY);
+            }
+        }
+    }
 
-    (plant, area * perimeter)
+    (target, area * perimeter)
 }
 
-pub fn calculate_fencing_price(arrangement: &mut Vec<String>) -> i128 {
-    let mut memo = HashMap::new();
+pub fn calculate_fencing_cost(arrangement: &mut Vec<String>) -> Result<i128> {
+    let mut grid = Grid::new(&arrangement);
+    let mut costs: HashMap<char, i128> = HashMap::new();
 
-    for row in 0..arrangement.len() {
-        for col in 0..arrangement[0].len() {
-            if arrangement[row].chars().nth(col).unwrap() != '.' {
-                let (plant, cost) = flood_fill(arrangement, row, col);
-
-                *memo.entry(plant).or_insert(0) += cost;
+    for row in 0..grid.rows {
+        for col in 0..grid.cols {
+            if let Some(cell) = grid.get(row, col) {
+                if cell != EMPTY {
+                    let (plant, cost) = flood_fill(&mut grid, row as usize, col as usize);
+                    *costs.entry(plant).or_default() += cost;
+                }
             }
         }
     }
 
-    println!("{:?}", memo);
-    memo.values().sum()
+    Ok(costs.values().sum())
+}
+
+pub fn parse_input(input: &str) -> Result<Vec<String>> {
+    Ok(input.lines().map(String::from).collect())
 }
 
 pub fn solve_part1() -> Result<i128> {
     let input = utils::read_input(2024, 12)?;
     let mut data = parse_input(&input)?;
 
-    let cost = calculate_fencing_price(&mut data);
+    let cost = calculate_fencing_cost(&mut data).unwrap();
     Ok(cost)
 }
 

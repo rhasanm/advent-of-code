@@ -17,7 +17,7 @@ MMMISSJEEE";
 fn test_part1_example() -> Result<()> {
     let mut data = day12::parse_input(EXAMPLE_INPUT)?;
     
-    let cost = day12::calculate_fencing_price(&mut data);
+    let cost = day12::calculate_fencing_cost(&mut data).unwrap();
     assert_eq!(cost, 1930);
     Ok(())
 }
@@ -26,7 +26,7 @@ fn test_part1_example() -> Result<()> {
 fn test_part1_solution() -> Result<()> {
     let solution = day12::solve_part1()?;
     println!("Solution Part 1: {}", solution);
-    // TODO: Once you have the correct answer, uncomment and update:
+
     assert_eq!(solution, 1573474);
     Ok(())
 }
