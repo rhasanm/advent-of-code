@@ -8,12 +8,19 @@ pub struct Input {
     y1: i32,
     y2: i32,
     t1: i32,
-    t2: i32
+    t2: i32,
 }
 
 impl Input {
     pub fn new(x1: i32, x2: i32, y1: i32, y2: i32, t1: i32, t2: i32) -> Self {
-        Self { x1, x2, y1, y2, t1, t2 }
+        Self {
+            x1,
+            x2,
+            y1,
+            y2,
+            t1,
+            t2,
+        }
     }
 }
 
@@ -37,13 +44,13 @@ pub fn parse_input(input: &str) -> Result<Vec<String>> {
 
 pub fn find_combination(input: &Input) -> Result<(i32, i32)> {
     (1..=100)
-    .flat_map(|a| (1..=100).map(move |b| (a, b)))
-    .find(|&(a, b)| {
-        let x_match = a * input.x1 + b * input.x2 == input.t1;
-        let y_match = a * input.y1 + b * input.y2 == input.t2;
-        x_match && y_match
-    })
-    .ok_or_else(|| anyhow::anyhow!("No valid combination found"))
+        .flat_map(|a| (1..=100).map(move |b| (a, b)))
+        .find(|&(a, b)| {
+            let x_match = a * input.x1 + b * input.x2 == input.t1;
+            let y_match = a * input.y1 + b * input.y2 == input.t2;
+            x_match && y_match
+        })
+        .ok_or_else(|| anyhow::anyhow!("No solution found"))
 }
 
 pub fn button_configurations(input: Vec<String>) -> Result<Vec<Input>> {
@@ -80,7 +87,7 @@ pub fn button_configurations(input: Vec<String>) -> Result<Vec<Input>> {
 pub fn solve_part1() -> Result<i32> {
     let input = utils::read_input(2024, 13)?;
     let data = parse_input(&input)?;
-    
+
     let configurations = button_configurations(data).unwrap();
     let tokens: i32 = configurations
         .iter()
@@ -94,7 +101,7 @@ pub fn solve_part1() -> Result<i32> {
 pub fn solve_part2() -> Result<String> {
     let input = utils::read_input(2024, 13)?;
     let data = parse_input(&input)?;
-    
+
     // TODO: Implement solution
     Ok("Not implemented yet".to_string())
 }

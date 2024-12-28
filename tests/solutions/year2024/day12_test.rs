@@ -16,7 +16,7 @@ MMMISSJEEE";
 #[test]
 fn test_part1_example() -> Result<()> {
     let mut data = day12::parse_input(EXAMPLE_INPUT)?;
-    
+
     let cost = day12::calculate_fencing_cost(&mut data).unwrap();
     assert_eq!(cost, 1930);
     Ok(())

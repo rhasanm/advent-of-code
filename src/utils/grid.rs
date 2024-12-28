@@ -11,7 +11,7 @@ impl Grid {
             .iter()
             .map(|row| row.chars().collect())
             .collect();
-        
+
         Self {
             rows: cells.len() as i32,
             cols: cells[0].len() as i32,

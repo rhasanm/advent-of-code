@@ -15,16 +15,16 @@ pub fn flood_fill(grid: &mut Grid, start_x: usize, start_y: usize) -> (char, i12
 
     let mut queue = VecDeque::from([(start_x as i32, start_y as i32)]);
     grid.set(start_x as i32, start_y as i32, VISITED);
-    
+
     let mut area = 0;
     let mut perimeter = 0;
 
     while let Some((x, y)) = queue.pop_front() {
         area += 1;
-        
+
         for &(dx, dy) in &DIRECTIONS {
             let (next_x, next_y) = (x + dx, y + dy);
-            
+
             match grid.get(next_x, next_y) {
                 Some(cell) if cell == target => {
                     grid.set(next_x, next_y, VISITED);

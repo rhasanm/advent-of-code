@@ -8,3 +8,6 @@ pub fn read_input(year: u32, day: u32) -> Result<String, std::io::Error> {
 
 mod grid;
 pub use grid::Grid;
+
+mod graph;
+pub use graph::Graph;

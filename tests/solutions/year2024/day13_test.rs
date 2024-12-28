@@ -20,14 +20,20 @@ Prize: X=18641, Y=10279";
 
 #[test]
 fn test_button_configurations() -> Result<()> {
-    let input = day13::parse_input("\
+    let input = day13::parse_input(
+        "\
         Button A: X+94, Y+34
         Button B: X+22, Y+67
         Prize: X=8400, Y=5400
-    ").unwrap();
+    ",
+    )
+    .unwrap();
     let configuration = day13::button_configurations(input);
 
-    assert_eq!(configuration.unwrap(), vec![Input::new(94, 22, 34, 67, 8400, 5400)]);
+    assert_eq!(
+        configuration.unwrap(),
+        vec![Input::new(94, 22, 34, 67, 8400, 5400)]
+    );
     Ok(())
 }
 
@@ -50,7 +56,7 @@ fn test_find_combinations() -> Result<()> {
 #[test]
 fn test_part1_example() -> Result<()> {
     let data = day13::parse_input(EXAMPLE_INPUT)?;
-    
+
     let configurations = day13::button_configurations(data).unwrap();
     let tokens: i32 = configurations
         .iter()
