@@ -36,15 +36,14 @@ pub fn parse_input(input: &str) -> Result<Vec<String>> {
 // fn binary_search()
 
 pub fn find_combination(input: &Input) -> Result<(i32, i32)> {
-    for a in 1..=100 {
-        for b in 1..=100 {
-            if a * input.x1 + b * input.x2 == input.t1 && 
-                a * input.y1 + b * input.y2 == input.t2 {
-                    return Ok((a, b));
-                }
-        }
-    }
-    anyhow::bail!("No solution found")
+    (1..=100)
+    .flat_map(|a| (1..=100).map(move |b| (a, b)))
+    .find(|&(a, b)| {
+        let x_match = a * input.x1 + b * input.x2 == input.t1;
+        let y_match = a * input.y1 + b * input.y2 == input.t2;
+        x_match && y_match
+    })
+    .ok_or_else(|| anyhow::anyhow!("No valid combination found"))
 }
 
 pub fn button_configurations(input: Vec<String>) -> Result<Vec<Input>> {
