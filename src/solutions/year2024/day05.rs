@@ -33,10 +33,11 @@ pub fn parse_page_update(input: &Vec<String>) -> Vec<Vec<i32>> {
 
 fn build_graph(page_ordering: &[(i32, i32)]) -> Graph<i32> {
     let mut graph = Graph::new();
-    
-    page_ordering.iter()
+
+    page_ordering
+        .iter()
         .for_each(|&(from, to)| graph.add_edge(from, to));
-    
+
     graph
 }
 
@@ -65,7 +66,7 @@ pub fn solve_part1() -> Result<i32> {
             }
         })
         .collect::<Vec<_>>();
-    
+
     let sum = correctly_ordered
         .iter()
         .map(|updates| updates.get(updates.len() / 2).unwrap())

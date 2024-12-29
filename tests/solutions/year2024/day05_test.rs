@@ -102,7 +102,7 @@ fn test_part1_example() -> Result<()> {
             }
         })
         .collect::<Vec<_>>();
-    
+
     let sum = correctly_ordered
         .iter()
         .map(|updates| updates.get(updates.len() / 2).unwrap())
