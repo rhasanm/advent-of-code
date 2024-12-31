@@ -12,8 +12,6 @@ This repository contains my solutions to [Advent of Code](https://adventofcode.c
 │   │   ├── year2023/
 │   │   └── year2024/
 │   ├── common/         # Shared traits and core functionality
-│   │   ├── traits.rs   # Common traits like Number
-│   │   └── mod.rs
 │   ├── utils/          # Shared utility functions
 │   └── bin/            # Command-line tools
 ├── inputs/             # Input files organized by year
