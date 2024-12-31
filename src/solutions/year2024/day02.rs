@@ -1,4 +1,4 @@
-use crate::utils;
+use crate::utils::prelude::read_input;
 use anyhow::{Ok, Result};
 
 type Data = Vec<Vec<i128>>;
@@ -60,7 +60,7 @@ pub fn check_safe_reports(data: Vec<Vec<i128>>) -> String {
 }
 
 pub fn solve_part1() -> Result<String> {
-    let input = utils::read_input(2024, 02)?;
+    let input = read_input(2024, 02)?;
     let data = parse_input(&input)?;
 
     let tot = check_safe_reports(data);
@@ -125,7 +125,7 @@ pub fn maximize_safe_reports(data: Data) -> String {
 }
 
 pub fn solve_part2() -> Result<String> {
-    let input = utils::read_input(2024, 02)?;
+    let input = read_input(2024, 02)?;
     let data = parse_input(&input)?;
 
     let tot = maximize_safe_reports(data);

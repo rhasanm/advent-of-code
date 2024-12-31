@@ -63,7 +63,7 @@ fn create_solution_files(year: u32, day: u32) -> std::io::Result<()> {
         let mut file = fs::File::create(&solution_file)?;
         write!(
             file,
-            r#"use crate::utils;
+            r#"use crate::utils::prelude::read_input;
 use anyhow::Result;
 
 pub fn parse_input(input: &str) -> Result<Vec<String>> {{
@@ -71,7 +71,7 @@ pub fn parse_input(input: &str) -> Result<Vec<String>> {{
 }}
 
 pub fn solve_part1() -> Result<String> {{
-    let input = utils::read_input({}, {})?;
+    let input = read_input({}, {})?;
     let data = parse_input(&input)?;
     
     // TODO: Implement solution
@@ -79,7 +79,7 @@ pub fn solve_part1() -> Result<String> {{
 }}
 
 pub fn solve_part2() -> Result<String> {{
-    let input = utils::read_input({}, {})?;
+    let input = read_input({}, {})?;
     let data = parse_input(&input)?;
     
     // TODO: Implement solution

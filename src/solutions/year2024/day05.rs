@@ -1,4 +1,4 @@
-use crate::utils::{self, Graph};
+use crate::utils::prelude::{read_input, Graph};
 use anyhow::Result;
 
 pub fn parse_input(input: &str) -> Result<Vec<String>> {
@@ -42,7 +42,7 @@ fn build_graph(page_ordering: &[(i32, i32)]) -> Graph<i32> {
 }
 
 pub fn solve_part1() -> Result<i32> {
-    let input = utils::read_input(2024, 5)?;
+    let input = read_input(2024, 5)?;
     let data = parse_input(&input)?;
 
     let page_ordering = parse_page_ordering(&data);
@@ -76,7 +76,7 @@ pub fn solve_part1() -> Result<i32> {
 }
 
 pub fn solve_part2() -> Result<String> {
-    let input = utils::read_input(2024, 5)?;
+    let input = read_input(2024, 5)?;
     let data = parse_input(&input)?;
 
     // TODO: Implement solution

@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::utils;
+use crate::utils::prelude::read_input;
 use anyhow::Result;
 
 lazy_static::lazy_static! {
@@ -85,7 +85,7 @@ pub fn walk(mut path: Vec<String>) -> i128 {
 }
 
 pub fn solve_part1() -> Result<i128> {
-    let input = utils::read_input(2024, 6)?;
+    let input = read_input(2024, 6)?;
     let data = parse_input(&input)?;
 
     let visited = walk(data);
@@ -93,7 +93,7 @@ pub fn solve_part1() -> Result<i128> {
 }
 
 pub fn solve_part2() -> Result<String> {
-    let input = utils::read_input(2024, 6)?;
+    let input = read_input(2024, 6)?;
     let data = parse_input(&input)?;
 
     // TODO: Implement solution

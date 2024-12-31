@@ -1,4 +1,4 @@
-use crate::utils;
+use crate::utils::prelude::read_input;
 use anyhow::Result;
 
 pub fn parse_input(input: &str) -> Result<Vec<String>> {
@@ -6,7 +6,7 @@ pub fn parse_input(input: &str) -> Result<Vec<String>> {
 }
 
 pub fn solve_part1() -> Result<String> {
-    let input = utils::read_input(2024, 10)?;
+    let input = read_input(2024, 10)?;
     let data = parse_input(&input)?;
 
     // TODO: Implement solution
@@ -14,7 +14,7 @@ pub fn solve_part1() -> Result<String> {
 }
 
 pub fn solve_part2() -> Result<String> {
-    let input = utils::read_input(2024, 10)?;
+    let input = read_input(2024, 10)?;
     let data = parse_input(&input)?;
 
     // TODO: Implement solution

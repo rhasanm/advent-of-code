@@ -1,4 +1,4 @@
-use crate::utils;
+use crate::utils::prelude::read_input;
 use anyhow::{Context, Result};
 use regex::Regex;
 
@@ -56,7 +56,7 @@ fn add_up_all_after_mul(instructions: Vec<String>) -> i128 {
 }
 
 pub fn solve_part1() -> Result<String> {
-    let input = utils::read_input(2024, 3).context("Could not read input file")?;
+    let input = read_input(2024, 3).context("Could not read input file")?;
 
     let data = parse_input(&input).context("Could not parse input")?;
 
@@ -68,7 +68,7 @@ pub fn solve_part1() -> Result<String> {
 }
 
 pub fn solve_part2() -> Result<String> {
-    let input = utils::read_input(2024, 3).context("Could not read input file")?;
+    let input = read_input(2024, 3).context("Could not read input file")?;
 
     let data = parse_input(&input).context("Could not parse input")?;
 

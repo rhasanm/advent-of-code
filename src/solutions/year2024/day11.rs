@@ -1,4 +1,4 @@
-use crate::utils;
+use crate::utils::prelude::read_input;
 use anyhow::Result;
 
 pub fn parse_input(input: &str) -> Result<Vec<i128>> {
@@ -32,7 +32,7 @@ pub fn blink(stones: Vec<i128>) -> Vec<i128> {
 }
 
 pub fn solve_part1() -> Result<i128> {
-    let input = utils::read_input(2024, 11)?;
+    let input = read_input(2024, 11)?;
     let mut stones = parse_input(&input)?;
 
     for _ in 0..25 {
@@ -43,7 +43,7 @@ pub fn solve_part1() -> Result<i128> {
 }
 
 pub fn solve_part2() -> Result<String> {
-    let input = utils::read_input(2024, 11)?;
+    let input = read_input(2024, 11)?;
     let data = parse_input(&input)?;
 
     // TODO: Implement solution

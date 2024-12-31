@@ -2,7 +2,6 @@ use std::collections::HashSet;
 
 use advent_of_code::{solutions::year2024::day05, utils::Graph};
 use anyhow::{Ok, Result};
-use itertools::Itertools;
 
 const EXAMPLE_INPUT: &str = "\
 47|53

@@ -1,4 +1,4 @@
-use crate::utils;
+use crate::utils::prelude::read_input;
 use anyhow::{Ok, Result};
 
 #[derive(Debug, PartialEq)]
@@ -85,7 +85,7 @@ pub fn button_configurations(input: Vec<String>) -> Result<Vec<Input>> {
 }
 
 pub fn solve_part1() -> Result<i32> {
-    let input = utils::read_input(2024, 13)?;
+    let input = read_input(2024, 13)?;
     let data = parse_input(&input)?;
 
     let configurations = button_configurations(data).unwrap();
@@ -99,7 +99,7 @@ pub fn solve_part1() -> Result<i32> {
 }
 
 pub fn solve_part2() -> Result<String> {
-    let input = utils::read_input(2024, 13)?;
+    let input = read_input(2024, 13)?;
     let data = parse_input(&input)?;
 
     // TODO: Implement solution

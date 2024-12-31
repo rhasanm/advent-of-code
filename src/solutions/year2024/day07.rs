@@ -3,7 +3,8 @@ use std::{
     str::FromStr,
 };
 
-use crate::{common::Number, utils};
+use crate::common::Number;
+use crate::utils::prelude::read_input;
 use anyhow::{Ok, Result};
 
 pub struct Input<T> {
@@ -124,7 +125,7 @@ pub fn find_combination<T: Number>(equation: &Input<T>, operators: Vec<Operators
 }
 
 pub fn solve_part1() -> Result<i64> {
-    let input = utils::read_input(2024, 7)?;
+    let input = read_input(2024, 7)?;
     let data = parse_input::<i64>(&input)?;
 
     let total_calibration = data
@@ -137,7 +138,7 @@ pub fn solve_part1() -> Result<i64> {
 }
 
 pub fn solve_part2() -> Result<i128> {
-    let input = utils::read_input(2024, 7)?;
+    let input = read_input(2024, 7)?;
     let data = parse_input::<i128>(&input)?;
 
     let total_calibration = data

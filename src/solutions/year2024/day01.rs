@@ -1,6 +1,6 @@
 use std::{collections::HashMap, iter::zip};
 
-use crate::utils;
+use crate::utils::prelude::read_input;
 use anyhow::{Context, Result};
 
 pub fn parse_input(input: &str) -> Result<Vec<String>> {
@@ -35,7 +35,7 @@ pub fn total_distance(data: Vec<String>) -> i128 {
 }
 
 pub fn solve_part1() -> Result<String> {
-    let input = utils::read_input(2024, 1).context("Could not read input file")?;
+    let input = read_input(2024, 1).context("Could not read input file")?;
 
     let data = parse_input(&input).context("Could not parse input")?;
 
@@ -60,7 +60,7 @@ pub fn similarity_score(data: Vec<String>) -> i128 {
 }
 
 pub fn solve_part2() -> Result<String> {
-    let input = utils::read_input(2024, 1).context("Could not read input file")?;
+    let input = read_input(2024, 1).context("Could not read input file")?;
 
     let data = parse_input(&input).context("Could not parse input")?;
 

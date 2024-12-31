@@ -1,4 +1,4 @@
-use crate::utils;
+use crate::utils::prelude::read_input;
 use anyhow::Result;
 
 pub fn parse_input(input: &str) -> Result<String> {
@@ -46,7 +46,7 @@ pub fn calculate_checksum(blocks: &[i32]) -> u128 {
 }
 
 pub fn solve_part1() -> Result<u128> {
-    let input = utils::read_input(2024, 9)?;
+    let input = read_input(2024, 9)?;
     let data = parse_input(&input)?;
 
     let mut blocks = represent_blocks(&data);
@@ -56,7 +56,7 @@ pub fn solve_part1() -> Result<u128> {
 }
 
 pub fn solve_part2() -> Result<String> {
-    let input = utils::read_input(2024, 9)?;
+    let input = read_input(2024, 9)?;
     let data = parse_input(&input)?;
 
     // TODO: Implement solution

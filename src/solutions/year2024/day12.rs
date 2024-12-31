@@ -1,6 +1,6 @@
 use std::collections::{HashMap, VecDeque};
 
-use crate::utils::{self, Grid};
+use crate::utils::prelude::{read_input, Grid};
 use anyhow::Result;
 
 const DIRECTIONS: [(i32, i32); 4] = [(0, 1), (1, 0), (0, -1), (-1, 0)];
@@ -71,7 +71,7 @@ pub fn parse_input(input: &str) -> Result<Vec<String>> {
 }
 
 pub fn solve_part1() -> Result<i128> {
-    let input = utils::read_input(2024, 12)?;
+    let input = read_input(2024, 12)?;
     let mut data = parse_input(&input)?;
 
     let cost = calculate_fencing_cost(&mut data).unwrap();
@@ -79,7 +79,7 @@ pub fn solve_part1() -> Result<i128> {
 }
 
 pub fn solve_part2() -> Result<String> {
-    let input = utils::read_input(2024, 12)?;
+    let input = read_input(2024, 12)?;
     let data = parse_input(&input)?;
 
     // TODO: Implement solution

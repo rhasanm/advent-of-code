@@ -1,4 +1,4 @@
-use crate::utils;
+use crate::utils::prelude::read_input;
 use anyhow::Result;
 use std::collections::HashSet;
 
@@ -95,7 +95,7 @@ pub fn count_xmas(grid: &[String]) -> i128 {
 }
 
 pub fn solve_part1() -> Result<i128> {
-    let input = utils::read_input(2024, 4)?;
+    let input = read_input(2024, 4)?;
     let data = parse_input(&input)?;
 
     let xmas_count = count_xmas(&data);
@@ -104,7 +104,7 @@ pub fn solve_part1() -> Result<i128> {
 }
 
 pub fn solve_part2() -> Result<i128> {
-    let input = utils::read_input(2024, 4)?;
+    let input = read_input(2024, 4)?;
     let data = parse_input(&input)?;
 
     let x_count = count_x(&data);
