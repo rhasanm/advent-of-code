@@ -9,5 +9,6 @@ pub mod math;
 pub mod parser;
 pub mod input;
 pub mod visualization;
+pub mod base_conversion;
 
 pub mod prelude;

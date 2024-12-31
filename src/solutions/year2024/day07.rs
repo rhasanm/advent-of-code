@@ -1,9 +1,6 @@
-use std::{
-    i128,
-    str::FromStr,
-};
+use std::str::FromStr;
 
-use crate::common::Number;
+use crate::{common::Number, utils::prelude::BaseConversion};
 use crate::utils::prelude::read_input;
 use anyhow::{Ok, Result};
 
@@ -124,13 +121,45 @@ pub fn find_combination<T: Number>(equation: &Input<T>, operators: Vec<Operators
     Ok(plus || mul)
 }
 
+pub fn find_combination_using_binary<T: Number>(equation: &Input<T>) -> Result<bool> {
+    let total_operator = equation.operands.len() - 1;
+    let total_combination = 2i64.pow(total_operator as u32);
+
+    for i in 0..total_combination {
+        let mut current_operator = 0;
+        let operators = i.to_binary_fixed(total_operator as usize).unwrap();
+        let test_value = equation.operands.iter().try_fold(T::default(), |acc, x| {
+            if acc == T::default() {
+                return acc.checked_add(x);
+            }
+
+            match operators.chars().nth(current_operator).unwrap() {
+                '0' => {
+                    current_operator += 1;
+                    acc.checked_add(x)
+                }
+                _ => {
+                    current_operator += 1;
+                    acc.checked_mul(x)
+                }
+            }
+        }).unwrap();
+
+        if test_value == equation.test_value {
+            return Ok(true);
+        }
+    }
+
+    Ok(false)
+}
+
 pub fn solve_part1() -> Result<i64> {
     let input = read_input(2024, 7)?;
     let data = parse_input::<i64>(&input)?;
 
     let total_calibration = data
         .iter()
-        .filter(|&equation| find_combination(equation, vec![]).unwrap())
+        .filter(|&equation| find_combination_using_binary(equation).unwrap())
         .map(|equation| equation.test_value)
         .sum();
 

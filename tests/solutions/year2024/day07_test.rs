@@ -1,4 +1,4 @@
-use advent_of_code::solutions::year2024::day07::{self, find_combination, find_combination_with_concatenating};
+use advent_of_code::solutions::year2024::day07::{self, find_combination, find_combination_using_binary, find_combination_with_concatenating};
 use anyhow::Result;
 
 const EXAMPLE_INPUT: &str = "\
@@ -22,6 +22,15 @@ fn test_find_combination() -> Result<()> {
 }
 
 #[test]
+fn test_find_combination_binary() -> Result<()> {
+    let data = day07::parse_input::<i64>(EXAMPLE_INPUT)?;
+
+    let res = find_combination_using_binary(&data[8]).unwrap();
+    assert!(res);
+    Ok(())
+}
+
+#[test]
 fn test_find_combination_with_concatenating() -> Result<()> {
     let data = day07::parse_input::<i64>(EXAMPLE_INPUT)?;
 
@@ -36,7 +45,7 @@ fn test_part1_example() -> Result<()> {
 
     let total_calibration: i64 = data
         .iter()
-        .filter(|&equation| find_combination(equation, vec![]).unwrap())
+        .filter(|&equation| find_combination_using_binary(equation).unwrap())
         .map(|equation| equation.test_value)
         .sum();
 
