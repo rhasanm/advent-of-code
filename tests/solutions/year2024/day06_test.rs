@@ -17,7 +17,7 @@ const EXAMPLE_INPUT: &str = "\
 fn test_mapper_object() {
     let direction = day06::MAPPER.get(&'>').unwrap();
 
-    assert_eq!(direction, &(1, 0));
+    assert_eq!(direction, &(0, 1));
 }
 
 #[test]

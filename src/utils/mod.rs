@@ -11,3 +11,5 @@ pub use grid::Grid;
 
 mod graph;
 pub use graph::Graph;
+
+mod benchmark;

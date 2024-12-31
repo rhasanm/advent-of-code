@@ -1,4 +1,4 @@
-use advent_of_code::solutions::year2024::day07::{self, find_combination, Input};
+use advent_of_code::solutions::year2024::day07::{self, find_combination, find_combination_with_concatenating};
 use anyhow::Result;
 
 const EXAMPLE_INPUT: &str = "\
@@ -14,7 +14,7 @@ const EXAMPLE_INPUT: &str = "\
 
 #[test]
 fn test_find_combination() -> Result<()> {
-    let data = day07::parse_input(EXAMPLE_INPUT)?;
+    let data = day07::parse_input::<i64>(EXAMPLE_INPUT)?;
 
     let res = find_combination(&data[0], Vec::new()).unwrap();
     assert!(res);
@@ -22,8 +22,17 @@ fn test_find_combination() -> Result<()> {
 }
 
 #[test]
+fn test_find_combination_with_concatenating() -> Result<()> {
+    let data = day07::parse_input::<i64>(EXAMPLE_INPUT)?;
+
+    let res = find_combination_with_concatenating(&data[3], Vec::new()).unwrap();
+    assert!(res);
+    Ok(())
+}
+
+#[test]
 fn test_part1_example() -> Result<()> {
-    let data = day07::parse_input(EXAMPLE_INPUT)?;
+    let data = day07::parse_input::<i64>(EXAMPLE_INPUT)?;
 
     let total_calibration: i64 = data
         .iter()
@@ -46,8 +55,15 @@ fn test_part1_solution() -> Result<()> {
 
 #[test]
 fn test_part2_example() -> Result<()> {
-    let data = day07::parse_input(EXAMPLE_INPUT)?;
-    // TODO: Add test implementation
+    let data = day07::parse_input::<i128>(EXAMPLE_INPUT)?;
+    
+    let total_calibration: i128 = data
+        .iter()
+        .filter(|&equation| find_combination_with_concatenating(equation, vec![]).unwrap())
+        .map(|equation| equation.test_value)
+        .sum();
+
+    assert_eq!(total_calibration, 11387);
     Ok(())
 }
 
@@ -55,7 +71,7 @@ fn test_part2_example() -> Result<()> {
 fn test_part2_solution() -> Result<()> {
     let solution = day07::solve_part2()?;
     println!("Solution Part 2: {}", solution);
-    // TODO: Once you have the correct answer, uncomment and update:
-    // assert_eq!(solution, "expected_answer");
+
+    assert_eq!(solution, 20928985450275);
     Ok(())
 }

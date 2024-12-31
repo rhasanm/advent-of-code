@@ -15,3 +15,5 @@ mod day05_test;
 mod day13_test;
 
 mod day07_test;
+
+mod day10_test;

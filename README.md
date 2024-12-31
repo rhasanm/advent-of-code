@@ -11,6 +11,9 @@ This repository contains my solutions to [Advent of Code](https://adventofcode.c
 │   │   ├── year2022/
 │   │   ├── year2023/
 │   │   └── year2024/
+│   ├── common/         # Shared traits and core functionality
+│   │   ├── traits.rs   # Common traits like Number
+│   │   └── mod.rs
 │   ├── utils/          # Shared utility functions
 │   └── bin/            # Command-line tools
 ├── inputs/             # Input files organized by year
@@ -129,6 +132,7 @@ cargo clippy
 - Input files should be named as `dayXX.txt` (e.g., `day01.txt`, `day02.txt`)
 - Each day's solution should implement both `solve_part1()` and `solve_part2()`
 - Add tests using the example inputs provided in the problem description
+- Use the common traits in `common/traits.rs` for numeric operations
 - Use the utility functions in `utils/mod.rs` for common operations
 
 ## 🤝 Contributing
