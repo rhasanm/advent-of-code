@@ -1,5 +1,4 @@
-use super::{Benchmark, BenchmarkRunner};
-use crate::solutions::year2024::day07::{self, Input};
+use crate::{benchmark::{Benchmark, BenchmarkRunner}, solutions::year2024::day07::{self, Input}};
 use anyhow::Result;
 use criterion::Criterion;
 use std::fs;

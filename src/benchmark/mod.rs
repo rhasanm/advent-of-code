@@ -2,8 +2,7 @@ use criterion::Criterion;
 use anyhow::Result;
 use std::path::PathBuf;
 
-pub mod day07;
-pub use day07::Day07Benchmark;
+pub mod year2024;
 
 pub trait Benchmark: Sized {
     fn new() -> Result<Self>;
