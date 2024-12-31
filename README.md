@@ -13,6 +13,7 @@ This repository contains my solutions to [Advent of Code](https://adventofcode.c
 │   │   └── year2024/
 │   ├── common/         # Shared traits and core functionality
 │   ├── utils/          # Shared utility functions
+│   ├── benchmark/      # Benchmark infrastructure
 │   └── bin/            # Command-line tools
 ├── inputs/             # Input files organized by year
 │   ├── 2022/
