@@ -7,19 +7,18 @@ This repository contains my solutions to [Advent of Code](https://adventofcode.c
 ```
 .
 ├── src/
-│   ├── solutions/       # Solutions organized by year
+│   ├── solutions/      # Solutions organized by year
 │   │   ├── year2022/
 │   │   ├── year2023/
 │   │   └── year2024/
-│   ├── common/         # Shared traits and core functionality
-│   ├── utils/          # Shared utility functions
 │   ├── benchmark/      # Benchmark infrastructure
-│   └── bin/            # Command-line tools
-├── inputs/             # Input files organized by year
+│   ├── common/        # Shared traits and core functionality
+│   ├── utils/         # Shared utility functions
+│   └── bin/           # Command-line tools
 │   ├── 2022/
 │   ├── 2023/
 │   └── 2024/
-└── tests/             # Test files matching the solution structure
+└── tests/            # Test files matching the solution structure
 ```
 
 ## 🛠️ Setup
@@ -66,6 +65,21 @@ cargo test year2023::day01
 # Test specific part of Day 1
 cargo test year2023::day01::part1
 ```
+
+## 🚀 Benchmarking
+
+Run benchmarks for specific solutions:
+```bash
+cargo run --bin bench -y <year> -d <day>
+```
+
+Example:
+```bash
+# Benchmark Year 2024, Day 7 solutions
+cargo run --bin bench -y 2024 -d 7
+```
+
+This will run performance benchmarks using Criterion.rs and output detailed metrics for different solution approaches.
 
 ## 📝 Adding New Solutions
 
@@ -124,6 +138,7 @@ cargo clippy
 - `rayon`: For parallel processing
 - `anyhow`: For error handling
 - `clap`: For command-line argument parsing
+- `criterion`: For performance benchmarking
 
 ## 💡 Tips
 
