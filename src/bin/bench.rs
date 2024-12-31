@@ -1,4 +1,3 @@
-
 use advent_of_code::benchmark::{year2024::Day07Benchmark, BenchmarkRunner};
 use clap::Parser;
 use anyhow::Result;
