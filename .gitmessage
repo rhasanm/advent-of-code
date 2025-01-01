@@ -1,0 +1,26 @@
+# [day-XX] <type>: <subject>
+# Example: [day-01] feat: implement solution for part 1
+#
+# Types:
+#   feat     (new solution or significant addition)
+#   fix      (bug fix in existing solution)
+#   perf     (performance improvements)
+#   refactor (restructuring code)
+#   test     (adding missing tests)
+#   docs     (documentation updates)
+#   chore    (maintenance, dependencies)
+#
+# Notes:
+#   - Subject should be in imperative mood (e.g., "add", not "adds")
+#   - Don't end subject with a period
+#   - Keep subject under 72 characters
+#
+# Body (optional):
+# - What was changed
+# - Why it was changed
+# - Any notable implementation details
+#
+# [Optional footer(s)]
+# Part 1 Result: <answer>
+# Part 2 Result: <answer>
+# Completion Time: <time>
