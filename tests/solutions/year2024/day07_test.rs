@@ -1,4 +1,6 @@
-use advent_of_code::solutions::year2024::day07::{self, find_combination, find_combination_using_binary, find_combination_with_concatenating};
+use advent_of_code::solutions::year2024::day07::{
+    self, find_combination, find_combination_using_binary, find_combination_with_concatenating,
+};
 use anyhow::Result;
 
 const EXAMPLE_INPUT: &str = "\
@@ -65,7 +67,7 @@ fn test_part1_solution() -> Result<()> {
 #[test]
 fn test_part2_example() -> Result<()> {
     let data = day07::parse_input::<i128>(EXAMPLE_INPUT)?;
-    
+
     let total_calibration: i128 = data
         .iter()
         .filter(|&equation| find_combination_with_concatenating(equation, vec![]).unwrap())

@@ -1,4 +1,7 @@
-use crate::{benchmark::{Benchmark, BenchmarkRunner}, solutions::year2024::day07::{self, Input}};
+use crate::{
+    benchmark::{Benchmark, BenchmarkRunner},
+    solutions::year2024::day07::{self, Input},
+};
 use anyhow::Result;
 use criterion::Criterion;
 use std::fs;
@@ -17,7 +20,7 @@ impl Benchmark for Day07Benchmark {
 
     fn run_benchmark(&self, c: &mut Criterion) {
         let mut group = c.benchmark_group("Day07");
-        
+
         group.bench_function("binary_approach", |b| {
             b.iter(|| {
                 for equation in criterion::black_box(&self.data) {

@@ -1,5 +1,5 @@
-use criterion::Criterion;
 use anyhow::Result;
+use criterion::Criterion;
 use std::path::PathBuf;
 
 pub mod year2024;

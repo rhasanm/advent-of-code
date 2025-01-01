@@ -61,7 +61,7 @@ pub trait BaseConversion: Number {
 
     fn to_base_fixed(&self, base: Self, min_length: usize) -> Result<String, ConversionError> {
         let mut result = self.to_base(base)?;
-        
+
         if result.starts_with('-') {
             let num_part = &result[1..];
             if num_part.len() < min_length {
@@ -70,7 +70,7 @@ pub trait BaseConversion: Number {
         } else if result.len() < min_length {
             result = format!("{}{}", "0".repeat(min_length - result.len()), result);
         }
-        
+
         Ok(result)
     }
 

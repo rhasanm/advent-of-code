@@ -1,7 +1,7 @@
 use std::str::FromStr;
 
-use crate::{common::Number, utils::prelude::BaseConversion};
 use crate::utils::prelude::read_input;
+use crate::{common::Number, utils::prelude::BaseConversion};
 use anyhow::{Ok, Result};
 
 pub struct Input<T> {
@@ -13,7 +13,7 @@ pub struct Input<T> {
 pub enum Operators {
     Plus,
     Multiplication,
-    Concatenation
+    Concatenation,
 }
 
 pub fn parse_input<T: Number>(input: &str) -> Result<Vec<Input<T>>>
@@ -40,7 +40,10 @@ where
         .collect()
 }
 
-pub fn find_combination_with_concatenating<T: Number>(equation: &Input<T>, operators: Vec<Operators>) -> Result<bool> {
+pub fn find_combination_with_concatenating<T: Number>(
+    equation: &Input<T>,
+    operators: Vec<Operators>,
+) -> Result<bool> {
     if operators.len() == equation.operands.len() - 1 {
         let mut current_operator = 0;
         let test_value = equation.operands.iter().try_fold(T::default(), |acc, x| {
@@ -56,7 +59,7 @@ pub fn find_combination_with_concatenating<T: Number>(equation: &Input<T>, opera
                 Operators::Multiplication => {
                     current_operator += 1;
                     acc.checked_mul(x)
-                },
+                }
                 Operators::Concatenation => {
                     current_operator += 1;
                     let digits = (x.to_f64().unwrap().abs().log10().floor() as i32 + 1) as u32;
@@ -76,7 +79,7 @@ pub fn find_combination_with_concatenating<T: Number>(equation: &Input<T>, opera
     mul_appended.push(Operators::Multiplication);
     let mul = find_combination_with_concatenating(equation, mul_appended)?;
 
-    let mut concatenated= operators.clone();
+    let mut concatenated = operators.clone();
     concatenated.push(Operators::Concatenation);
     let con = find_combination_with_concatenating(equation, concatenated)?;
 
@@ -99,7 +102,7 @@ pub fn find_combination<T: Number>(equation: &Input<T>, operators: Vec<Operators
                 Operators::Multiplication => {
                     current_operator += 1;
                     acc.checked_mul(x)
-                },
+                }
                 Operators::Concatenation => {
                     current_operator += 1;
                     let digits = (x.to_f64().unwrap().abs().log10().floor() as i32 + 1) as u32;
@@ -128,22 +131,26 @@ pub fn find_combination_using_binary<T: Number>(equation: &Input<T>) -> Result<b
     for i in 0..total_combination {
         let mut current_operator = 0;
         let operators = i.to_binary_fixed(total_operator as usize).unwrap();
-        let test_value = equation.operands.iter().try_fold(T::default(), |acc, x| {
-            if acc == T::default() {
-                return acc.checked_add(x);
-            }
+        let test_value = equation
+            .operands
+            .iter()
+            .try_fold(T::default(), |acc, x| {
+                if acc == T::default() {
+                    return acc.checked_add(x);
+                }
 
-            match operators.chars().nth(current_operator).unwrap() {
-                '0' => {
-                    current_operator += 1;
-                    acc.checked_add(x)
+                match operators.chars().nth(current_operator).unwrap() {
+                    '0' => {
+                        current_operator += 1;
+                        acc.checked_add(x)
+                    }
+                    _ => {
+                        current_operator += 1;
+                        acc.checked_mul(x)
+                    }
                 }
-                _ => {
-                    current_operator += 1;
-                    acc.checked_mul(x)
-                }
-            }
-        }).unwrap();
+            })
+            .unwrap();
 
         if test_value == equation.test_value {
             return Ok(true);
