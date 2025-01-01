@@ -15,10 +15,10 @@ This repository contains my solutions to [Advent of Code](https://adventofcode.c
 │   ├── common/        # Shared traits and core functionality
 │   ├── utils/         # Shared utility functions
 │   └── bin/           # Command-line tools
+└── tests/            # Test files matching the solution structure
 │   ├── 2022/
 │   ├── 2023/
 │   └── 2024/
-└── tests/            # Test files matching the solution structure
 ```
 
 ## 🛠️ Setup
