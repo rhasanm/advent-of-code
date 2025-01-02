@@ -1,4 +1,4 @@
-use advent_of_code::solutions::year2024::day08;
+use advent_of_code::solutions::year2024::day08::{self, City};
 use anyhow::Result;
 
 const EXAMPLE_INPUT: &str = "\
@@ -18,7 +18,14 @@ const EXAMPLE_INPUT: &str = "\
 #[test]
 fn test_part1_example() -> Result<()> {
     let data = day08::parse_input(EXAMPLE_INPUT)?;
-    // TODO: Add test implementation
+
+    let mut city = City::new(data);
+    let lines = city.find_lines();
+
+    city.mark_antinodes(&lines)?;
+    let antinodes = city.grid.count_antinodes();
+
+    assert_eq!(antinodes, 14);
     Ok(())
 }
 
@@ -26,8 +33,8 @@ fn test_part1_example() -> Result<()> {
 fn test_part1_solution() -> Result<()> {
     let solution = day08::solve_part1()?;
     println!("Solution Part 1: {}", solution);
-    // TODO: Once you have the correct answer, uncomment and update:
-    // assert_eq!(solution, "expected_answer");
+
+    assert_eq!(solution, 364);
     Ok(())
 }
 

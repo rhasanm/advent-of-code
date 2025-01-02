@@ -1,5 +1,7 @@
 use advent_of_code::{
-    solutions::year2024::day10::{self, trailheads_on_topographic_map, trailheads_on_topographic_map_all},
+    solutions::year2024::day10::{
+        self, trailheads_on_topographic_map, trailheads_on_topographic_map_all,
+    },
     utils::Grid,
 };
 use anyhow::Result;
