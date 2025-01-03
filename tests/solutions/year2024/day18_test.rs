@@ -42,7 +42,7 @@ fn test_part1_example() -> Result<()> {
 
     println!("{}", memory.space);
 
-    assert_eq!(steps, 22);
+    assert_eq!(steps.0, 22);
     Ok(())
 }
 

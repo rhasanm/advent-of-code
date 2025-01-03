@@ -21,27 +21,41 @@ pub fn print_colored_grid(grid: &[Vec<char>]) {
     }
 }
 
-pub fn render_grid_as_image(grid: &[Vec<char>], filename: &str) -> Result<(), Box<dyn std::error::Error>> {
-    let root = BitMapBackend::new(filename, (640, 480)).into_drawing_area();
+pub fn render_grid_as_image(
+    grid: &[Vec<char>],
+    path: &[(i32, i32)], // Add a path parameter
+    filename: &str,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let root = BitMapBackend::new(filename, (710, 710)).into_drawing_area();
     root.fill(&WHITE)?;
 
     let cell_size = 10;
     for (x, row) in grid.iter().enumerate() {
         for (y, &cell) in row.iter().enumerate() {
             let color = match cell {
-                '#' => RGBColor(255, 0, 0),    // Red
-                '.' => RGBColor(0, 255, 0),    // Green
-                'O' => RGBColor(255, 255, 0),  // Yellow
-                _ => RGBColor(0, 0, 0),        // Black
+                '#' => RGBColor(255, 0, 0),    // Red for corrupted cells
+                '.' => RGBColor(0, 255, 0),    // Green for safe cells
+                'O' => RGBColor(255, 255, 0),  // Yellow for visited cells
+                _ => RGBColor(0, 0, 0),        // Black for default
             };
             root.draw(&Rectangle::new(
                 [
-                    ((y * cell_size) as i32, (x * cell_size) as i32),
+                    ((y as i32 * cell_size as i32), (x as i32 * cell_size as i32)),
                     (((y + 1) * cell_size) as i32, ((x + 1) * cell_size) as i32),
                 ],
                 color.filled(),
             ))?;
         }
+    }
+
+    for &(x, y) in path {
+        root.draw(&Rectangle::new(
+            [
+                ((y as i32 * cell_size as i32), (x as i32 * cell_size as i32)),
+                (((y + 1) as i32 * cell_size as i32), ((x + 1) as i32 * cell_size as i32)),
+            ],
+            RGBColor(0, 0, 255).filled(), // Blue for the path
+        ))?;
     }
 
     Ok(())
