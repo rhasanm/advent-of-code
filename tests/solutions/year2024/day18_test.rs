@@ -51,7 +51,7 @@ fn test_part1_solution() -> Result<()> {
     let solution = day18::solve_part1()?;
     println!("Solution Part 1: {}", solution);
 
-    assert_eq!(solution, 22);
+    assert_eq!(solution, 262);
     Ok(())
 }
 

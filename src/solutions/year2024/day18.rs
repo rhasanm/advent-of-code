@@ -77,6 +77,12 @@ pub fn solve_part1() -> Result<i32> {
 
     println!("{}", memory.space);
 
+    crate::utils::visualization::print_colored_grid(&memory.space.cells);
+
+    let _ = crate::utils::visualization::render_grid_as_image(&memory.space.cells, "test.png");
+
+    let _ = crate::utils::visualization::render_grid_interactive(&memory.space.cells);
+    
     Ok(steps)
 }
 
