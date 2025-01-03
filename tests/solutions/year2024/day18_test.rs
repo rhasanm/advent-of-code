@@ -37,6 +37,12 @@ fn test_part1_example() -> Result<()> {
         memory.mark_corrupted_bytes(data.iter().take(12).cloned().collect::<Vec<BytePosition>>());
 
     println!("{}", memory.space);
+
+    let steps = memory.find_shortest_path_to_exit((6, 6))?;
+
+    println!("{}", memory.space);
+
+    assert_eq!(steps, 22);
     Ok(())
 }
 
@@ -44,8 +50,8 @@ fn test_part1_example() -> Result<()> {
 fn test_part1_solution() -> Result<()> {
     let solution = day18::solve_part1()?;
     println!("Solution Part 1: {}", solution);
-    // TODO: Once you have the correct answer, uncomment and update:
-    // assert_eq!(solution, "expected_answer");
+
+    assert_eq!(solution, 22);
     Ok(())
 }
 
