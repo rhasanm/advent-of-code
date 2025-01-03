@@ -1,7 +1,7 @@
 use plotters::prelude::*;
 use crossterm::{
     cursor, execute,
-    style::{Color as CrosstermColor, Print, ResetColor, SetBackgroundColor, SetForegroundColor},
+    style::{Color as CrosstermColor, Print, ResetColor, SetForegroundColor},
     terminal::{Clear, ClearType},
 };
 use std::io::{stdout, Write};
