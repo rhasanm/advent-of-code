@@ -1,15 +1,42 @@
-use advent_of_code::solutions::year2024::day18;
+use advent_of_code::solutions::year2024::day18::{self, BytePosition, Memory, SAFE_BYTE};
 use anyhow::Result;
 
 const EXAMPLE_INPUT: &str = "\
-first line
-second line
-third line";
+5,4
+4,2
+4,5
+3,0
+2,1
+6,3
+2,4
+1,5
+0,6
+3,3
+2,6
+5,1
+1,2
+5,5
+2,5
+6,5
+1,4
+0,4
+6,4
+1,1
+6,1
+1,0
+0,5
+1,6
+2,0";
 
 #[test]
 fn test_part1_example() -> Result<()> {
     let data = day18::parse_input(EXAMPLE_INPUT)?;
-    // TODO: Add test implementation
+
+    let mut memory = Memory::new(7, 7, SAFE_BYTE);
+    let _ =
+        memory.mark_corrupted_bytes(data.iter().take(12).cloned().collect::<Vec<BytePosition>>());
+
+    println!("{}", memory.space);
     Ok(())
 }
 

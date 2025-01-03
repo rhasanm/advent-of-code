@@ -23,7 +23,7 @@ impl Point {
     fn distance(&self, other: &Point) -> Point {
         Point {
             x: (self.x - other.x).abs(),
-            y: (self.y - other.y).abs()
+            y: (self.y - other.y).abs(),
         }
     }
 }
@@ -40,7 +40,7 @@ impl Line {
         Self {
             p1: p1,
             p2: p2,
-            d: p1.distance(&p2)
+            d: p1.distance(&p2),
         }
     }
 
@@ -71,7 +71,9 @@ impl AntennasGrid {
     }
 
     pub fn count_antinodes(&self) -> usize {
-        self.grid.cells.iter()
+        self.grid
+            .cells
+            .iter()
             .flat_map(|row| row.iter())
             .filter(|&&ch| ch == '#')
             .count()
@@ -116,7 +118,8 @@ impl City {
                                 lines.push(Line::new(start, Point::new(x, y)));
                             }
                         }
-                        antenna_locations.entry(ch)
+                        antenna_locations
+                            .entry(ch)
                             .or_default()
                             .push(Point::new(x, y));
                     }
@@ -129,7 +132,7 @@ impl City {
     pub fn mark_antinodes(&mut self, lines: &[Line]) -> Result<()> {
         for line in lines {
             let (t1, t2) = line.calculate_antinodes();
-            
+
             if self.grid.in_bounds(t1.x, t1.y) {
                 self.grid.set(t1.x, t1.y, '#');
             }
