@@ -79,10 +79,10 @@ pub fn solve_part1() -> Result<i32> {
 
     crate::utils::visualization::print_colored_grid(&memory.space.cells);
 
-    let _ = crate::utils::visualization::render_grid_as_image(&memory.space.cells, "test.png");
+    let _ = crate::utils::visualization::render_grid_as_image(&memory.space.cells, "outputs/2024/day18/grid.png");
 
     let _ = crate::utils::visualization::render_grid_interactive(&memory.space.cells);
-    
+
     Ok(steps)
 }
 
