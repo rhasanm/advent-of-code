@@ -19,3 +19,5 @@ mod day07_test;
 mod day10_test;
 
 mod day08_test;
+
+mod day18_test;
