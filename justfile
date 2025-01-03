@@ -6,3 +6,6 @@ new year day:
 
 bench year day:
    cargo run --bin bench -- -y {{year}} -d {{day}}
+
+run year day part:
+   cargo run --bin advent_of_code {{year}} {{day}} {{part}}

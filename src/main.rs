@@ -18,6 +18,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         (2024, 1, 1) => println!("Solution: {}", year2024::day01::solve_part1()?),
         (2024, 1, 2) => println!("Solution: {}", year2024::day01::solve_part2()?),
         (2024, 2, 1) => println!("Solution: {}", year2024::day02::solve_part1()?),
+        (2024, 18, 1) => println!("Solution: {}", year2024::day18::solve_part1()?),
         _ => println!(
             "Solution not implemented yet for year {} day {} part {}",
             year, day, part
