@@ -7,7 +7,15 @@ This repository contains my solutions to [Advent of Code](https://adventofcode.c
 ### Project Structure
 ```
 .
-├── src/                  # Source code
+├── src/
+│   ├── solutions/      # Solutions organized by year
+│   │   ├── year2022/
+│   │   ├── year2023/
+│   │   └── year2024/
+│   ├── benchmark/      # Benchmark infrastructure
+│   ├── common/        # Shared traits and core functionality
+│   ├── utils/         # Shared utility functions
+│   └── bin/           # Command-line tools
 ├── benches/              # Performance benchmarks
 │   ├── criterion/        # Criterion.rs benchmarks
 │   └── iai/             # CPU instruction benchmarks
