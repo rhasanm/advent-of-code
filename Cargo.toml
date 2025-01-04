@@ -4,16 +4,13 @@ version = "0.1.0"
 edition = "2021"
 
 [workspace]
-members = [
-    ".",
-    "macros"
-]
+members = [".", "macros"]
 
 [dependencies]
 aoc-macros = { path = "macros" }
 anyhow = "1.0.95"
 color-eyre = "0.6.3"
-criterion = "0.5.1"
+criterion = { version = "0.5.1", features = ["html_reports"] }
 crossterm = "0.28.1"
 iai = "0.1.1"
 itertools = "0.13.0"
