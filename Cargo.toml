@@ -30,3 +30,13 @@ features = ["derive"]
 [[bin]]
 name = "aoc"
 path = "src/bin/aoc.rs"
+
+[[bench]]
+name = "criterion"
+harness = false
+path = "benches/criterion/mod.rs"
+
+[[bench]]
+name = "iai"
+harness = false
+path = "benches/iai/mod.rs"
