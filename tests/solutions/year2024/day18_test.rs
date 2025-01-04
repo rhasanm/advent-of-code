@@ -1,5 +1,6 @@
 use advent_of_code::solutions::year2024::day18::{self, BytePosition, Memory, SAFE_BYTE};
 use anyhow::Result;
+use aoc_macros::adjacent;
 
 const EXAMPLE_INPUT: &str = "\
 5,4

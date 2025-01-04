@@ -17,7 +17,7 @@ impl Default for Point {
 
 impl Point {
     pub fn new(x: i32, y: i32) -> Self {
-        Self { x: x, y: y }
+        Self { x, y }
     }
 
     fn distance(&self, other: &Point) -> Point {
@@ -38,8 +38,8 @@ pub struct Line {
 impl Line {
     fn new(p1: Point, p2: Point) -> Self {
         Self {
-            p1: p1,
-            p2: p2,
+            p1,
+            p2,
             d: p1.distance(&p2),
         }
     }

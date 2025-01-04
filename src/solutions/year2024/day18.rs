@@ -1,6 +1,9 @@
 use std::collections::VecDeque;
 
-use crate::{common::prelude::CARDINAL_DIRECTIONS, utils::{prelude::read_input, Grid}};
+use crate::{
+    common::prelude::CARDINAL_DIRECTIONS,
+    utils::{prelude::read_input, Grid},
+};
 use anyhow::{Ok, Result};
 
 pub const CORRUPTED_BYTE: char = '#';
@@ -27,12 +30,16 @@ impl Memory {
         Ok(())
     }
 
-    pub fn find_shortest_path_to_exit(&mut self, exit: BytePosition) -> Result<(i32, Vec<BytePosition>)> {
+    pub fn find_shortest_path_to_exit(
+        &mut self,
+        exit: BytePosition,
+    ) -> Result<(i32, Vec<BytePosition>)> {
         let mut bytes: VecDeque<Props> = VecDeque::new();
         bytes.push_back(((0, 0), 0));
-    
-        let mut parents: Vec<Vec<Option<BytePosition>>> = vec![vec![None; self.space.cols as usize]; self.space.rows as usize];
-    
+
+        let mut parents: Vec<Vec<Option<BytePosition>>> =
+            vec![vec![None; self.space.cols as usize]; self.space.rows as usize];
+
         while let Some(prop) = bytes.pop_front() {
             if prop.0 == exit {
                 let mut path = Vec::new();
@@ -45,11 +52,11 @@ impl Memory {
                 path.reverse();
                 return Ok((prop.1, path));
             }
-    
+
             for (dx, dy) in CARDINAL_DIRECTIONS {
-                let x = dx + prop.0.0;
-                let y = dy + prop.0.1;
-    
+                let x = dx + prop.0 .0;
+                let y = dy + prop.0 .1;
+
                 if self.space.in_bounds(x, y) && self.space.get(x, y) == Some(SAFE_BYTE) {
                     bytes.push_back(((x, y), prop.1 + 1));
                     self.space.set(x, y, VISITED_BYTE);
@@ -79,7 +86,12 @@ pub fn solve_part1() -> Result<i32> {
     let data = parse_input(&input)?;
 
     let mut memory = Memory::new(71, 71, SAFE_BYTE);
-    let _ = memory.mark_corrupted_bytes(data.iter().take(1024).cloned().collect::<Vec<BytePosition>>());
+    let _ = memory.mark_corrupted_bytes(
+        data.iter()
+            .take(1024)
+            .cloned()
+            .collect::<Vec<BytePosition>>(),
+    );
 
     println!("{}", memory.space);
 

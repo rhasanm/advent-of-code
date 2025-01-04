@@ -3,7 +3,14 @@ name = "advent_of_code"
 version = "0.1.0"
 edition = "2021"
 
+[workspace]
+members = [
+    ".",
+    "macros"
+]
+
 [dependencies]
+aoc-macros = { path = "macros" }
 anyhow = "1.0.95"
 color-eyre = "0.6.3"
 criterion = "0.5.1"

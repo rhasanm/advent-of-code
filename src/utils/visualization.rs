@@ -1,9 +1,9 @@
-use plotters::prelude::*;
 use crossterm::{
     cursor, execute,
     style::{Color as CrosstermColor, Print, ResetColor, SetForegroundColor},
     terminal::{Clear, ClearType},
 };
+use plotters::prelude::*;
 use std::io::{stdout, Write};
 
 pub fn print_colored_grid(grid: &[Vec<char>]) {
@@ -33,10 +33,10 @@ pub fn render_grid_as_image(
     for (x, row) in grid.iter().enumerate() {
         for (y, &cell) in row.iter().enumerate() {
             let color = match cell {
-                '#' => RGBColor(255, 0, 0),    // Red for corrupted cells
-                '.' => RGBColor(0, 255, 0),    // Green for safe cells
-                'O' => RGBColor(255, 255, 0),  // Yellow for visited cells
-                _ => RGBColor(0, 0, 0),        // Black for default
+                '#' => RGBColor(255, 0, 0),   // Red for corrupted cells
+                '.' => RGBColor(0, 255, 0),   // Green for safe cells
+                'O' => RGBColor(255, 255, 0), // Yellow for visited cells
+                _ => RGBColor(0, 0, 0),       // Black for default
             };
             root.draw(&Rectangle::new(
                 [
@@ -52,7 +52,10 @@ pub fn render_grid_as_image(
         root.draw(&Rectangle::new(
             [
                 ((y as i32 * cell_size as i32), (x as i32 * cell_size as i32)),
-                (((y + 1) as i32 * cell_size as i32), ((x + 1) as i32 * cell_size as i32)),
+                (
+                    ((y + 1) as i32 * cell_size as i32),
+                    ((x + 1) as i32 * cell_size as i32),
+                ),
             ],
             RGBColor(0, 0, 255).filled(), // Blue for the path
         ))?;
