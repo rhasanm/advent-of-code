@@ -57,9 +57,15 @@ pub fn benchmark_part1(c: &mut Criterion) {
 
 pub fn benchmark_part2(c: &mut Criterion) {
     let input = read_input(2024, 7).unwrap();
-    
+    let plot_config = PlotConfiguration::default()
+    .summary_scale(criterion::AxisScale::Linear);
+
     let mut group = c.benchmark_group("2024_day07");
-    
+    group
+    .plot_config(plot_config)
+    .sampling_mode(SamplingMode::Linear)
+    .sample_size(10);
+
     group.bench_function("part2/main_solution", |b| {
         b.iter(|| {
             let data = day07::parse_input::<i128>(&input).unwrap();
