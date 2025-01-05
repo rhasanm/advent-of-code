@@ -1,6 +1,9 @@
 use criterion::Criterion;
 
-pub fn create_benchmark_group<'a>(c: &'a mut Criterion, name: &'a str) -> criterion::BenchmarkGroup<'a, criterion::measurement::WallTime> {
+pub fn create_benchmark_group<'a>(
+    c: &'a mut Criterion,
+    name: &'a str,
+) -> criterion::BenchmarkGroup<'a, criterion::measurement::WallTime> {
     let mut group = c.benchmark_group(name);
     group.sample_size(100);
     group.measurement_time(std::time::Duration::from_secs(5));

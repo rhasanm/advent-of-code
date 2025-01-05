@@ -7,7 +7,7 @@ pub fn benchmark_day07_part1() -> i64 {
         data.iter()
             .filter(|&equation| day07::find_combination_using_binary(equation).unwrap())
             .map(|equation| equation.test_value)
-            .sum()
+            .sum(),
     )
 }
 
@@ -16,8 +16,10 @@ pub fn benchmark_day07_part2() -> i128 {
     let data = day07::parse_input::<i128>(&input).unwrap();
     iai::black_box(
         data.iter()
-            .filter(|&equation| day07::find_combination_with_concatenating(equation, vec![]).unwrap())
+            .filter(|&equation| {
+                day07::find_combination_with_concatenating(equation, vec![]).unwrap()
+            })
             .map(|equation| equation.test_value)
-            .sum()
+            .sum(),
     )
 }

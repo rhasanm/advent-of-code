@@ -1,11 +1,12 @@
 use advent_of_code::{solutions::year2024::day07, utils::prelude::read_input};
-use criterion::{black_box, criterion_group, BenchmarkId, Criterion, PlotConfiguration, SamplingMode};
+use criterion::{
+    black_box, criterion_group, BenchmarkId, Criterion, PlotConfiguration, SamplingMode,
+};
 
 pub fn benchmark_part1(c: &mut Criterion) {
     let input = read_input(2024, 7).unwrap();
-    
-    let plot_config = PlotConfiguration::default()
-        .summary_scale(criterion::AxisScale::Linear);
+
+    let plot_config = PlotConfiguration::default().summary_scale(criterion::AxisScale::Linear);
 
     let mut group = c.benchmark_group("2024_day07");
     group
@@ -20,35 +21,35 @@ pub fn benchmark_part1(c: &mut Criterion) {
                 data.iter()
                     .filter(|&equation| day07::find_combination_using_binary(equation).unwrap())
                     .map(|equation| equation.test_value)
-                    .sum::<i64>()
+                    .sum::<i64>(),
             )
         })
     });
 
     group.bench_function("part1/parse_input", |b| {
-        b.iter(|| {
-            black_box(day07::parse_input::<i64>(&input).unwrap())
-        })
+        b.iter(|| black_box(day07::parse_input::<i64>(&input).unwrap()))
     });
 
     let input_sizes = [10, 50, 100, 200];
     for size in input_sizes.iter() {
         let test_input = format!("42: 1 2 3\n").repeat(*size);
-        
+
         group.bench_with_input(
-            BenchmarkId::new("part1/scaling", size), 
+            BenchmarkId::new("part1/scaling", size),
             &test_input,
             |b, test_input| {
                 b.iter(|| {
                     let data = day07::parse_input::<i64>(test_input).unwrap();
                     black_box(
                         data.iter()
-                            .filter(|&equation| day07::find_combination_using_binary(equation).unwrap())
+                            .filter(|&equation| {
+                                day07::find_combination_using_binary(equation).unwrap()
+                            })
                             .map(|equation| equation.test_value)
-                            .sum::<i64>()
+                            .sum::<i64>(),
                     )
                 })
-            }
+            },
         );
     }
 
@@ -57,23 +58,24 @@ pub fn benchmark_part1(c: &mut Criterion) {
 
 pub fn benchmark_part2(c: &mut Criterion) {
     let input = read_input(2024, 7).unwrap();
-    let plot_config = PlotConfiguration::default()
-    .summary_scale(criterion::AxisScale::Linear);
+    let plot_config = PlotConfiguration::default().summary_scale(criterion::AxisScale::Linear);
 
     let mut group = c.benchmark_group("2024_day07");
     group
-    .plot_config(plot_config)
-    .sampling_mode(SamplingMode::Linear)
-    .sample_size(10);
+        .plot_config(plot_config)
+        .sampling_mode(SamplingMode::Linear)
+        .sample_size(10);
 
     group.bench_function("part2/main_solution", |b| {
         b.iter(|| {
             let data = day07::parse_input::<i128>(&input).unwrap();
             black_box(
                 data.iter()
-                    .filter(|&equation| day07::find_combination_with_concatenating(equation, vec![]).unwrap())
+                    .filter(|&equation| {
+                        day07::find_combination_with_concatenating(equation, vec![]).unwrap()
+                    })
                     .map(|equation| equation.test_value)
-                    .sum::<i128>()
+                    .sum::<i128>(),
             )
         })
     });
@@ -93,10 +95,10 @@ pub fn benchmark_part2(c: &mut Criterion) {
                                 day07::find_combination_with_concatenating(equation, vec).unwrap()
                             })
                             .map(|equation| equation.test_value)
-                            .sum::<i128>()
+                            .sum::<i128>(),
                     )
                 })
-            }
+            },
         );
     }
 

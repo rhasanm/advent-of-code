@@ -82,7 +82,8 @@ clean:
     rm -rf fuzz/target/
 
 # Full Development Cycle
-dev-cycle: check test bench-custom
+dev-cycle: 
+    check test bench-criterion
 
 # Documentation
 doc:
