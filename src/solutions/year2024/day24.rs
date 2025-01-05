@@ -109,12 +109,19 @@ pub fn map_reduce(initial_values: &mut WireValueMap, operations: &mut Vec<Operat
         }
     }
 
-    let mut zvaluse: Vec<_> = initial_values.iter().filter_map(|(k, v)| k.starts_with('z').then_some((&k[1..], v))).collect();
-    zvaluse.sort();
-    zvaluse.reverse();
-    let binaries: String = zvaluse.iter().fold("".to_string(), |prev, &(_, &v)| format!("{}{}", prev, v));
+    let mut binaries = initial_values
+    .iter()
+    .filter_map(|(k, &v)| k.strip_prefix('z').map(|num| (num, v)))
+    .collect::<Vec<_>>();
+    binaries.sort();
+    binaries.reverse();
+    
+    let binary_string = binaries
+    .iter()
+    .map(|(_, v)| v.to_string())
+    .collect::<String>();
 
-    Ok(i64::from_str_radix(&binaries, 2)?)
+    Ok(i64::from_str_radix(&binary_string, 2)?)
 }
 
 pub fn solve_part1() -> Result<i64> {
