@@ -1,0 +1,57 @@
+# This is a configuration file for cargo-deny
+# https://embarkstudios.github.io/cargo-deny/
+
+[advisories]
+vulnerability = "deny"
+unmaintained = "warn"
+yanked = "warn"
+notice = "warn"
+ignore = [
+    # Add any advisory IDs that you want to ignore
+]
+
+[licenses]
+unlicensed = "deny"
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "BSD-3-Clause",
+    "BSD-2-Clause",
+    "CC0-1.0",
+    "ISC",
+    "Zlib",
+    "Unicode-DFS-2016",
+]
+copyleft = "warn"
+allow-osi-fsf-free = "either"
+default = "deny"
+confidence-threshold = 0.8
+
+[bans]
+multiple-versions = "warn"
+highlight = "all"
+skip = [
+    # Add any crates you want to skip checking for multiple versions
+]
+
+[sources]
+unknown-registry = "warn"
+unknown-git = "deny"
+allow-registry = ["crates-io"]
+allow-git = []
+
+[sources.allow-org]
+# Add any GitHub organizations you want to allow
+github = ["rust-lang", "rust-random"]
+
+[licenses.private]
+ignore = false
+
+[licenses.clarify]
+# Add any license clarifications here if needed
+# [[licenses.clarify]]
+# name = "ring"
+# expression = "MIT AND ISC AND OpenSSL"
+# license-files = [
+#     { path = "LICENSE", hash = 0xbd0eed23 }
+# ]
