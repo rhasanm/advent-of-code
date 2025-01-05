@@ -13,6 +13,9 @@ format:
 lint:
     cargo clippy -- -D warnings
 
+lint-dependencies:
+    cargo deny check
+
 check: format lint
     cargo check
     pre-commit run --all-files
